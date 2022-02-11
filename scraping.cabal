@@ -25,7 +25,11 @@ source-repository head
 
 library
   exposed-modules:
+      Courses
+      Domain.Courses
       Lib
+      Repository.Courses
+      Util.BSUtils
   other-modules:
       Paths_scraping
   hs-source-dirs:
