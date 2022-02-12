@@ -1,6 +1,6 @@
 module Domain.Courses where
 
-data CourseFundamentalInfo = CourseFundamentalInfo {
+data Course = Course{
     name        :: String
   , quarter     :: String
   , for         :: String
@@ -8,24 +8,13 @@ data CourseFundamentalInfo = CourseFundamentalInfo {
   , coordinator :: String
   , instructor  :: String
   , recommended :: String
-  , prereq      :: String
-  , language    :: String
+  , essential   :: String
   , updatedOn         :: String 
   , outline           :: String 
   , goals             :: String 
   , schedule          :: String 
   , textbook          :: String 
   , criteria          :: String 
-  } deriving (Show, Eq)
-
-data Course = Course{
-    fundamentalInfo   :: CourseFundamentalInfo
   , note              :: String
   , reference         :: String
-  } 
-  | CourseWONote {
-    fundamentalInfo   :: CourseFundamentalInfo
-  , reference         :: String
-  }
-  | CourseWONoteAndReference CourseFundamentalInfo
-  deriving (Eq, Show)
+  } deriving (Show, Eq)
