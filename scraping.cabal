@@ -28,6 +28,7 @@ library
       Domain.Courses
       Repository.Courses
       Util.BSUtils
+      Util.Strip
   other-modules:
       Paths_scraping
   hs-source-dirs:

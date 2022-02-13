@@ -19,7 +19,6 @@ main = do
         let url = printf "http://web-ext.u-aizu.ac.jp/official/curriculum/syllabus/2022_1_J_0%02d.html" $ (n :: Int)
         parsedText <- scrapeURL url courses
         let result = fromMaybe [] parsedText
-        putStrLn . show $ n
         -- ここでresultについての処理を入れる.
         mapM_ (LBS.putStrLn . encode ) result
         threadDelay (1*1000*1000)
