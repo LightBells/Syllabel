@@ -5,6 +5,7 @@ import Domain.Courses
 import Util.BSUtils
 import Util.Strip
 
+import Data.List.Split
 import Text.HTML.Scalpel
 import Control.Applicative
 import Control.Monad
@@ -19,7 +20,8 @@ preprocess :: BS.ByteString -> String
 preprocess = strip . decodeByteString
 
 fundamentalInfoBuilder courseName columns = Course {
-      name              = preprocess courseName
+      _id               = (splitOn " " $ preprocess courseName) !! 0
+    , name              = preprocess courseName
     , quarter           = preprocess $ columns !! 1
     , for               = preprocess $ columns !! 2
     , credits           = preprocess $ columns !! 3
