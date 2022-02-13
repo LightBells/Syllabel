@@ -11,7 +11,6 @@ import qualified Data.ByteString.Lazy.Char8 as LBS
 import Control.Concurrent
 
 import Domain.Courses
-import Domain.JSONCourses
 import Repository.Courses
 
 main :: IO ()         

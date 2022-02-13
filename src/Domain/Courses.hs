@@ -1,4 +1,8 @@
+{-# LANGUAGE TemplateHaskell #-}
 module Domain.Courses where
+
+import Data.Aeson
+import Data.Aeson.TH
 
 data Course = Course{
     name        :: String
@@ -18,3 +22,5 @@ data Course = Course{
   , note              :: String
   , reference         :: String
   } deriving (Show, Eq)
+
+$(deriveJSON defaultOptions ''Course)
