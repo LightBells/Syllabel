@@ -15,22 +15,25 @@ import qualified Data.ByteString as BS
 nItems :: Int -> Scraper s [a] -> Scraper s [a]
 nItems n = mfilter ((==n) . length)
 
+preprocess :: BS.ByteString -> String
+preprocess = strip . decodeByteString
+
 fundamentalInfoBuilder courseName columns = Course {
-      name        = strip $ decodeByteString courseName
-    , quarter     = strip $ decodeByteString $ columns !! 1
-    , for         = strip $ decodeByteString $ columns !! 2
-    , credits     = strip $ decodeByteString $ columns !! 3
-    , coordinator = strip $ decodeByteString $ columns !! 4
-    , instructor  = strip $ decodeByteString $ columns !! 5
-    , recommended = strip $ decodeByteString $ columns !! 6
-    , essential   = strip $ decodeByteString $ columns !! 7
-    , updatedOn         = strip $ decodeByteString $ columns !! 8
-    , outline           = strip $ decodeByteString $ columns !! 9
-    , goals             = strip $ decodeByteString $ columns !! 10
-    , schedule          = strip $ decodeByteString $ columns !! 11
-    , textbook          = strip $ decodeByteString $ columns !! 12
-    , criteria          = strip $ decodeByteString $ columns !! 13
-    , note              = strip $ decodeByteString $ columns !! 14
+      name              = preprocess courseName
+    , quarter           = preprocess $ columns !! 1
+    , for               = preprocess $ columns !! 2
+    , credits           = preprocess $ columns !! 3
+    , coordinator       = preprocess $ columns !! 4
+    , instructor        = preprocess $ columns !! 5
+    , recommended       = preprocess $ columns !! 6
+    , essential         = preprocess $ columns !! 7
+    , updatedOn         = preprocess $ columns !! 8
+    , outline           = preprocess $ columns !! 9
+    , goals             = preprocess $ columns !! 10
+    , schedule          = preprocess $ columns !! 11
+    , textbook          = preprocess $ columns !! 12
+    , criteria          = preprocess $ columns !! 13
+    , note              = preprocess $ columns !! 14
     , reference         = ""
 }
 
@@ -46,7 +49,7 @@ textCourse= do
   cols <- nItems 16 . texts $ "td"
   let courseWithFundamentalInfo = fundamentalInfoBuilder courseName cols
   return courseWithFundamentalInfo {
-     reference              = strip $ decodeByteString $ cols !! 15
+     reference              = preprocess $ cols !! 15
   }                   
 
 textCourseWOReference:: Scraper BS.ByteString Course
