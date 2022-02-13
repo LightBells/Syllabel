@@ -26,6 +26,7 @@ source-repository head
 library
   exposed-modules:
       Domain.Courses
+      Domain.JSONCourses
       Repository.Courses
       Util.BSUtils
   other-modules:
@@ -33,7 +34,8 @@ library
   hs-source-dirs:
       src
   build-depends:
-      base >=4.7 && <5
+      aeson
+    , base >=4.7 && <5
     , bytestring
     , http-conduit
     , scalpel
@@ -50,7 +52,8 @@ executable scraping-exe
       app
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
+      aeson
+    , base >=4.7 && <5
     , bytestring
     , http-conduit
     , scalpel
@@ -69,7 +72,8 @@ test-suite scraping-test
       test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
+      aeson
+    , base >=4.7 && <5
     , bytestring
     , http-conduit
     , scalpel

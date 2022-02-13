@@ -5,10 +5,13 @@ import Data.Maybe
 import Text.Show.Unicode
 import Text.HTML.Scalpel
 import Text.Printf
+import Data.Aeson
+import qualified Data.ByteString.Lazy.Char8 as LBS
 
 import Control.Concurrent
 
 import Domain.Courses
+import Domain.JSONCourses
 import Repository.Courses
 
 main :: IO ()         
@@ -19,7 +22,7 @@ main = do
         let result = fromMaybe [] parsedText
         putStrLn . show $ n
         -- ここでresultについての処理を入れる.
-        mapM_ (putStrLn . ushow) result
+        mapM_ (LBS.putStrLn . encode ) result
         threadDelay (1*1000*1000)
         loop $ n+1
       loop _ = return ()
