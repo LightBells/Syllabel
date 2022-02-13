@@ -39,6 +39,7 @@ library
     , bytestring
     , http-conduit
     , scalpel
+    , split
     , text
     , unicode-show
     , utf8-string

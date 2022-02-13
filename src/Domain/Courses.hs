@@ -5,7 +5,8 @@ import Data.Aeson
 import Data.Aeson.TH
 
 data Course = Course{
-    name        :: String
+    _id         :: String
+  , name        :: String
   , quarter     :: String
   , for         :: String
   , credits     :: String
