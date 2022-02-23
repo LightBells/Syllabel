@@ -5,7 +5,7 @@ import Data.Aeson
 import Data.Aeson.TH
 
 data Course = Course{
-    _id         :: String
+    _id         :: Maybe String
   , name        :: String
   , quarter     :: String
   , for         :: String
@@ -24,4 +24,4 @@ data Course = Course{
   , reference         :: String
   } deriving (Show, Eq)
 
-$(deriveJSON defaultOptions ''Course)
+$(deriveJSON defaultOptions{omitNothingFields = True} ''Course)

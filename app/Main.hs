@@ -1,3 +1,4 @@
+{-# LANGUAGE OverloadedStrings #-}
 module Main where
 
 import Data.Maybe
@@ -12,6 +13,7 @@ import Control.Concurrent
 
 import Domain.Courses
 import Repository.Courses
+import Repository.Client
 
 main :: IO ()         
 main = do             
@@ -20,9 +22,16 @@ main = do
         parsedText <- scrapeURL url courses
         let result = fromMaybe [] parsedText
         -- ここでresultについての処理を入れる.
-        mapM_ (LBS.putStrLn . encode ) result
+        let ids = map ((fromMaybe "") . _id) result
+        let jsons =  map (encode . \x -> x{_id = Nothing}) $ result
+        let pairOfIdAndJson = zip ids jsons
+        
+        result <- putCourseInformation pairOfIdAndJson
+        print result
+        -- mapM_ LBS.putStrLn jsons
         threadDelay (1*1000*1000)
         loop $ n+1
       loop _ = return ()
-
   loop 1
+  HTTPResult statusCode body <- getRequest "http://localhost:8000/v1/commit"
+  print statusCode

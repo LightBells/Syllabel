@@ -28,6 +28,9 @@ dependencies:
 - bytestring
 - utf8-string
 - aeson
+- http-client
+- http-client-tls
+- http-types
 
 library:
   source-dirs: src

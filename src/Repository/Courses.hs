@@ -17,10 +17,10 @@ nItems :: Int -> Scraper s [a] -> Scraper s [a]
 nItems n = mfilter ((==n) . length)
 
 preprocess :: BS.ByteString -> String
-preprocess = strip . decodeByteString
+preprocess = decodeByteString
 
 fundamentalInfoBuilder courseName columns = Course {
-      _id               = (splitOn " " $ preprocess courseName) !! 0
+      _id               = Just $ (splitOn " " $ preprocess courseName) !! 0
     , name              = preprocess courseName
     , quarter           = preprocess $ columns !! 1
     , for               = preprocess $ columns !! 2
